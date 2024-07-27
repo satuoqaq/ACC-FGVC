@@ -19,22 +19,20 @@ class CFA_Block(nn.Module):
         self.feature_size = 512
         self.h = h
         self.w = w
-        self.avg_pool_x = nn.AdaptiveAvgPool2d((h, 1))  # 在x轴进行平均池化操作，x轴即为水平方向w，进而使w的值变为1
-        self.avg_pool_y = nn.AdaptiveAvgPool2d((1, w))  # 在y轴进行平均池化操作，y轴为垂直方向h，进而使h的值变为1
+        self.avg_pool_x = nn.AdaptiveAvgPool2d((h, 1))
+        self.avg_pool_y = nn.AdaptiveAvgPool2d((1, w))
         self.conv1_1x1 = nn.Conv2d(in_channels=channels, out_channels=channels // reduction, kernel_size=1, stride=1,
-                                   bias=False)  # 图中的r即为reduction，进而使其输出的特征图像的通道数变为原先的1/16
+                                   bias=False)
         self.conv2_1x1 = nn.Conv2d(in_channels=channels // reduction, out_channels=channels, kernel_size=1, stride=1,
-                                   bias=False)  # 图中的r即为reduction，进而使其输出的特征图像的通道数变为原先的1/16
-        self.relu = nn.ReLU()  # relu激活函数
-        # self.bn1 = nn.BatchNorm2d(channels // reduction)  # 二维的正则化操作
-        # self.bn2 = nn.BatchNorm2d(channels)
+                                   bias=False)
+        self.relu = nn.ReLU()
 
         self.F_h = nn.Conv2d(in_channels=channels // reduction, out_channels=channels, kernel_size=1, stride=1,
-                             bias=False)  # 将垂直方向上的通道数通过卷积来将其复原
+                             bias=False)
         self.F_w = nn.Conv2d(in_channels=channels // reduction, out_channels=channels, kernel_size=1, stride=1,
-                             bias=False)  # 将水平方向上的通道数通过卷积来将其复原
+                             bias=False)
 
-        self.sigmoid_h = nn.Sigmoid()  # 定义的sigmoid方法
+        self.sigmoid_h = nn.Sigmoid()
         self.sigmoid_w = nn.Sigmoid()
         self.sigmoid = nn.Sigmoid()
 
