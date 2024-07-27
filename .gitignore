@@ -1,0 +1,16 @@
+__pycache__
+bird_*
+car_*
+air_*
+dog_*
+
+*.pth
+
+models/*.pth
+vis/
+edge_tf_logs/
+edge_work_dirs/
+021.Eastern_Towhee/
+122.Harris_Sparrow_000/
+bird_resnet50_output/
+Brown_Thrasher_0005_155176.jpg/
